@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fernando.demo.dao.RedDetailMapper">
+  <resultMap id="BaseResultMap" type="com.fernando.demo.entity.RedDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="record_id" jdbcType="INTEGER" property="recordId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="is_active" jdbcType="TINYINT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, record_id, amount, is_active, create_time
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from red_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fernando.demo.entity.RedDetail">
+    insert into red_detail (id, record_id, amount, 
+      is_active, create_time)
+    values (#{id,jdbcType=INTEGER}, #{recordId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
+      #{isActive,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.fernando.demo.entity.RedDetail">
+    update red_detail
+    set record_id = #{recordId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      is_active = #{isActive,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, record_id, amount, is_active, create_time
+    from red_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, record_id, amount, is_active, create_time
+    from red_detail
+  </select>
+</mapper>
